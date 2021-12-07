@@ -16,11 +16,12 @@ import os
 
 env = environ.Env(
     # set casting, default value
+    READ_LOCAL_DOT_ENV_FILE=(bool, True),
     SECRET_KEY=str,
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ["*"]),
-    LANGUAGE_CODE=str,
-    TIME_ZONE=str,
+    LANGUAGE_CODE=(str, "en-us"),
+    TIME_ZONE=(str, "America/Chicago"),
     GOOGLE_API_KEY=(str, None),
 )
 
@@ -28,7 +29,8 @@ env = environ.Env(
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+if READ_LOCAL_DOT_ENV_FILE := env("READ_LOCAL_DOT_ENV_FILE"):
+    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
