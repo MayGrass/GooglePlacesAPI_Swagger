@@ -4,3 +4,5 @@ djangorestframework_xml
 drf-yasg
 django-environ
 requests
+gunicorn
+whitenoise
